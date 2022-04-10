@@ -1,6 +1,7 @@
 <template>
-///asdasdasd
   <h1>This is the Admin Functions Management Components</h1>
+    <h1>Second coomit</h1>
+
   <button type="submit" class="badge badge-success" @click="report">
         Generate Report
       </button>
