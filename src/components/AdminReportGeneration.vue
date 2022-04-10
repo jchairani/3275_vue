@@ -1,5 +1,6 @@
 <template>
   <h1>This is the report Generation Components</h1>
+  <h1>I hate reports</h1>
 </template>
 
 <script>
