@@ -1,6 +1,5 @@
 <template>
   <h1>This is the Admin Functions Management Components</h1>
-  <h2>This is third commit</h2>
   <button type="submit" class="badge badge-success" @click="report">
         Generate Report
       </button>
