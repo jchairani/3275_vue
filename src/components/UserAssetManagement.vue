@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-dark bg-primary">
     <a class="navbar-brand" href="#" id="navUser">User</a>
-    <span class="navbar-brand mb-0 h1" id="navTitle">Asset Management</span>
+    <span class="navbar-brand mb-0 h1" id="navTitle">User Asset Management</span>
     <span class="navbar-text">
       <button type="button" class="btn btn-light" @click="cart" id="navCart">
         Cart
@@ -16,7 +16,7 @@
           <!-- to add content to the right in a row -->
           <div class="ml-auto col-auto" id="filterText">RAM</div>
           <div class="ml-auto col-auto">
-            <select v-model="chosenRAM">
+            <select v-model="chosenRAM" v-on:change="getRamBySize(chosenRAM)">
               <option v-for="(item, index) in ram" :key="index">
                 {{ item }}
               </option>
@@ -24,7 +24,10 @@
           </div>
           <div class="ml-auto col-auto" id="filterText">Processor</div>
           <div class="ml-auto col-auto">
-            <select v-model="chosenProcessor">
+            <select
+              v-model="chosenProcessor"
+              v-on:change="getProcessorByName(chosenProcessor)"
+            >
               <option v-for="(item, index) in processor" :key="index">
                 {{ item }}
               </option>
@@ -32,13 +35,16 @@
           </div>
           <div class="ml-auto col-auto" id="filterText">OS</div>
           <div class="ml-auto col-auto">
-            <select v-model="chosenOS">
+            <select v-model="chosenOS" v-on:change="getOSByName(chosenOS)">
               <option v-for="(item, index) in os" :key="index">
                 {{ item }}
               </option>
             </select>
           </div>
-          <!-- to add content to the right in a row-->
+          
+          <div class="ml-auto col-auto">
+            <button type="button" class="btn btn-primary" @click="getAllProducts()">Clear Filter</button>
+          </div>
         </div>
         <div class="table-wrapper-scroll-y my-custom-scrollbar">
           <table class="table">
@@ -81,7 +87,9 @@ export default {
       processor: [],
       os: [],
       message: "",
-      chosenRAM: null,
+      chosenRAM: "",
+      chosenProcessor: "",
+      chosenOS: "",
     };
   },
   methods: {
@@ -121,6 +129,48 @@ export default {
           this.products = response.data;
         })
         .catch((e) => {
+          this.message = e.response.data.message;
+        });
+    },
+    getRamBySize(size) {
+      ProductService.getRamBySize(size)
+        .then((response) => {
+          this.products = [];
+          this.chosenProcessor = "";
+          this.chosenOS = "";
+          this.products = response.data;
+          console.log(this.products);
+        })
+        .catch((e) => {
+          alert("fail");
+          this.message = e.response.data.message;
+        });
+    },
+    getProcessorByName(name) {
+      ProductService.getProcessorByName(name)
+        .then((response) => {
+          this.products = [];
+          this.chosenRAM = "";
+          this.chosenOS = "";
+          this.products = response.data;
+          console.log(this.products);
+        })
+        .catch((e) => {
+          alert("fail");
+          this.message = e.response.data.message;
+        });
+    },
+    getOSByName(name) {
+      ProductService.getOSByName(name)
+        .then((response) => {
+          this.products = [];
+          this.chosenProcessor = "";
+          this.chosenRAM = "";
+          this.products = response.data;
+          console.log(this.products);
+        })
+        .catch((e) => {
+          alert("fail");
           this.message = e.response.data.message;
         });
     },
