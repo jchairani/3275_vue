@@ -9,7 +9,7 @@
           type="text"
           class="form-control"
           id="student"
-          v-model="studentLoginRequest.studentId"
+          v-model="studentLoginRequest.username"
         />
       </div>
       <div class="form-group">
@@ -21,8 +21,8 @@
           v-model="studentLoginRequest.password"
         />
       </div>
-
-      <button type="submit" class="badge badge-success" @click="login">
+      <br>
+      <button type="submit" class="badge bg-secondary" @click="login">
         Login
       </button>
       <p>{{ message }}</p>
@@ -37,7 +37,7 @@ export default {
   name: "userLogin",
   data() {
     return {
-      studentLoginRequest: { studentId: "", password: "" },
+      studentLoginRequest: { username: "", password: "" },
       message: "",
     };
   },
@@ -46,15 +46,14 @@ export default {
       LoginService.login(this.studentLoginRequest)
         .then((response) => {
           var student = response.data;
-          console.log(student);
-          localStorage.setItem("sid", student.id);
+          localStorage.setItem("sid", student.username);
           this.$router.push({ name: "UserAssetManagement" });
         })
         .catch((e) => {
+          alert("User doesn't exist");
           this.studentLoginRequest.studentId = "";
           this.studentLoginRequest.password = "";
           this.message = e.response.data.message;
-          this.$router.push({ name: "UserAssetManagement" });
         });
     },
   },
