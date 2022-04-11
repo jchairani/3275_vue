@@ -1,5 +1,4 @@
 <template>
-
   <nav class="navbar navbar-dark bg-primary">
     <a class="navbar-brand" href="#" id="navUser">User</a>
     <span class="navbar-brand mb-0 h1" id="navTitle">Asset Management</span>
@@ -12,33 +11,33 @@
   <br />
   <div class="container">
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-sm-9">
         <div class="row">
           <!-- to add content to the right in a row -->
           <div class="ml-auto col-auto" id="filterText">RAM</div>
           <div class="ml-auto col-auto">
-            <div class="dropdown">
-              <button
-                class="btn btn-secondary dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                RAM
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </div>
+            <select v-model="chosenRAM">
+              <option v-for="(item, index) in ram" :key="index">
+                {{ item }}
+              </option>
+            </select>
           </div>
           <div class="ml-auto col-auto" id="filterText">Processor</div>
-
+          <div class="ml-auto col-auto">
+            <select v-model="chosenProcessor">
+              <option v-for="(item, index) in processor" :key="index">
+                {{ item }}
+              </option>
+            </select>
+          </div>
           <div class="ml-auto col-auto" id="filterText">OS</div>
-
+          <div class="ml-auto col-auto">
+            <select v-model="chosenOS">
+              <option v-for="(item, index) in os" :key="index">
+                {{ item }}
+              </option>
+            </select>
+          </div>
           <!-- to add content to the right in a row-->
         </div>
         <div class="table-wrapper-scroll-y my-custom-scrollbar">
@@ -64,7 +63,7 @@
           </table>
         </div>
       </div>
-      <div class="col-sm-6">
+      <div class="col-sm-3">
         <p>Sed ut perspiciatis...</p>
       </div>
     </div>
@@ -82,6 +81,7 @@ export default {
       processor: [],
       os: [],
       message: "",
+      chosenRAM: null,
     };
   },
   methods: {
@@ -161,6 +161,11 @@ h2 {
   text-align: center;
 }
 #filterText {
-  font-size: 25px;
+  font-size: 20px;
+}
+
+select {
+  width: 120px;
+  height: 100;
 }
 </style>
