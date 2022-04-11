@@ -1,6 +1,7 @@
 <template>
   <div class="edit-form">
-    <h4>ACCIO ASSET MANAGAMENT</h4>
+    <h1>ACCIO</h1>
+    <h4>ASSET MANAGAMENT</h4>
     <h4>Login</h4>
     <form>
       <div class="form-group">

@@ -4,15 +4,15 @@
   <h2>Welcome Admin</h2>
   <button type="submit" class="badge badge-success" @click="user">
         Modify Users
-      </button>
+      </button><br><br>
 
   <button type="submit" class="badge badge-success" @click="products">
         Modify Products and Inventory
-      </button>
+      </button><br><br>
 
   <button type="submit" class="badge badge-success" @click="report">
         Generate Report
-      </button>
+      </button><br><br>
 
   </div>
   
@@ -54,5 +54,10 @@ h1 {
 h2 {
   color: white;
   background-color: blue;
+}
+
+button {
+  color: black;
+  width: 250px;
 }
 </style>

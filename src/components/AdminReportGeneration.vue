@@ -25,7 +25,7 @@
             <tbody>
               <tr v-for="product in products" :key="product.id">
                 <td>{{ product.id }}</td>
-                <td>{{ product.brand }}</td>
+                <td>{{ product.brandName }}</td>
                 <td>{{ product.gpu }}</td>
                 <td>{{ product.operatingSystem }}</td>
                 <td>{{ product.processor }}</td>
