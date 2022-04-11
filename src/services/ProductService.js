@@ -22,6 +22,12 @@ class ProductService{
     getOSByName(name){
         return http.get(`/products/operatingSystem/${name}`);
     }
+    getAvailable(){
+        return http.get(`/products/isReady`);
+    }
+    getUnavailable(){
+        return http.get(`/products/isNotReady`);
+    }
 }
 
 export default new ProductService();

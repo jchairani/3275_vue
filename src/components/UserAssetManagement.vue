@@ -11,7 +11,7 @@
   <br />
   <div class="container">
     <div class="row">
-      <div class="col-sm-9">
+      <div class="col-sm">
         <div class="row">
           <!-- to add content to the right in a row -->
           <div class="ml-auto col-auto" id="filterText">RAM</div>
@@ -41,6 +41,7 @@
               </option>
             </select>
           </div>
+          
           
           <div class="ml-auto col-auto">
             <button type="button" class="btn btn-primary" @click="getAllProducts()">Clear Filter</button>
@@ -90,6 +91,7 @@ export default {
       chosenRAM: "",
       chosenProcessor: "",
       chosenOS: "",
+      
     };
   },
   methods: {
@@ -167,19 +169,48 @@ export default {
           this.chosenProcessor = "";
           this.chosenRAM = "";
           this.products = response.data;
-          console.log(this.products);
+          
         })
         .catch((e) => {
           alert("fail");
           this.message = e.response.data.message;
         });
     },
+    getAvailable(ready){
+      if(ready == true){
+        ProductService.getAvailable().then((response)=>{
+        this.products = [];
+        this.chosenProcessor = "";
+        this.chosenRAM = "";
+        this.chosenOS = "";
+        this.products = response.data;
+        console.log(this.products);
+      }).catch((e)=>{
+        this.message = e.response.data.message;
+      })
+      }else if(ready == false){
+        ProductService.getUnavailable().then((response)=>{
+        this.products = [];
+        this.chosenProcessor = "";
+        this.chosenRAM = "";
+        this.chosenOS = "";
+        this.products = response.data;
+        console.log(this.products);
+      }).catch((e)=>{
+        this.message = e.response.data.message;
+      })
+      }
+      
+    },
+   
+    
   },
   mounted() {
     this.getAllProducts();
     this.getAllRam();
     this.getAllProcessor();
     this.getAllOperatingSystem();
+    this.getAvailable(true);
   },
 };
 </script>
@@ -211,7 +242,7 @@ h2 {
   text-align: center;
 }
 #filterText {
-  font-size: 20px;
+  font-size: 10;
 }
 
 select {

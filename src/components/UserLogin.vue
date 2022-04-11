@@ -46,7 +46,7 @@ export default {
       LoginService.login(this.studentLoginRequest)
         .then((response) => {
           var student = response.data;
-          localStorage.setItem("sid", student.username);
+          localStorage.setItem("sid", student.id);
           this.$router.push({ name: "UserAssetManagement" });
         })
         .catch((e) => {
