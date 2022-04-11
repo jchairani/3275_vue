@@ -5,6 +5,8 @@ import AdminFunctions from "../components/AdminFunctions";
 import AdminReportGeneration from "../components/AdminReportGeneration";
 import UserAssetManagement from "../components/UserAssetManagement";
 import UserShoppingCart from "../components/UserShoppingCart";
+import AdminFunctionsProduct from "../components/AdminFunctionsProduct";
+import AdminFunctionsUser from "../components/AdminFunctionsUser";
 
 const routes = [
     {
@@ -36,7 +38,17 @@ const routes = [
         path: "/UserShoppingCart",
         name: "UserShoppingCart",
         component: UserShoppingCart
-    }
+    },
+    {
+        path: "/AdminFunctionsProduct",
+        name: "AdminFunctionsProduct",
+        component: AdminFunctionsProduct
+    },
+    {
+        path: "/AdminFunctionsUser",
+        name: "AdminFunctionsUser",
+        component: AdminFunctionsUser
+    },
 
 ];
 

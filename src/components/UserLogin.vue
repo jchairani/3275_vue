@@ -4,12 +4,12 @@
     <h4>Login</h4>
     <form>
       <div class="form-group">
-        <label for="studentId">User ID</label>
+        <label for="userId">User ID</label>
         <input
           type="text"
           class="form-control"
-          id="student"
-          v-model="studentLoginRequest.username"
+          id="user"
+          v-model="userLoginRequest.username"
         />
       </div>
       <div class="form-group">
@@ -18,7 +18,7 @@
           type="password"
           class="form-control"
           id="password"
-          v-model="studentLoginRequest.password"
+          v-model="userLoginRequest.password"
         />
       </div>
       <br>
@@ -37,22 +37,28 @@ export default {
   name: "userLogin",
   data() {
     return {
-      studentLoginRequest: { username: "", password: "" },
+      userLoginRequest: { username: "", password: "" },
       message: "",
     };
   },
   methods: {
     login() {
-      LoginService.login(this.studentLoginRequest)
+      LoginService.login(this.userLoginRequest)
         .then((response) => {
-          var student = response.data;
-          localStorage.setItem("sid", student.id);
-          this.$router.push({ name: "UserAssetManagement" });
+          var user = response.data;
+          localStorage.setItem("uid", user.id);
+          localStorage.setItem("uname", user.username);
+          if (user.admin == 'admin') {
+            this.$router.push({ name: "AdminFunctions" });
+          } else {
+            this.$router.push({ name: "UserAssetManagement" });
+          }
+          
         })
         .catch((e) => {
           alert("User doesn't exist");
-          this.studentLoginRequest.studentId = "";
-          this.studentLoginRequest.password = "";
+          this.userLoginRequest.userId = "";
+          this.userLoginRequest.password = "";
           this.message = e.response.data.message;
         });
     },
