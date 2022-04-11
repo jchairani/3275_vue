@@ -1,9 +1,16 @@
 <template>
   <nav class="navbar navbar-dark bg-primary">
     <a class="navbar-brand" href="#" id="navUser">User</a>
-    <span class="navbar-brand mb-0 h1" id="navTitle">User Asset Management</span>
+    <span class="navbar-brand mb-0 h1" id="navTitle"
+      >User Asset Management</span
+    >
     <span class="navbar-text">
-      <button type="button" class="btn btn-light" @click="cart" id="navCart">
+      <button
+        type="button"
+        class="btn btn-light"
+        @click="goToCart"
+        id="navCart"
+      >
         Cart
       </button>
     </span>
@@ -41,10 +48,15 @@
               </option>
             </select>
           </div>
-          
-          
+
           <div class="ml-auto col-auto">
-            <button type="button" class="btn btn-primary" @click="getAllProducts()">Clear Filter</button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              @click="getAllProducts()"
+            >
+              Refresh
+            </button>
           </div>
         </div>
         <div class="table-wrapper-scroll-y my-custom-scrollbar">
@@ -56,6 +68,7 @@
                 <th scope="col">Processor</th>
                 <th scope="col">Operating System</th>
                 <th scope="col">isReady</th>
+                <th scope="col">Choose</th>
               </tr>
             </thead>
             <tbody>
@@ -65,13 +78,49 @@
                 <td>{{ product.processor }}</td>
                 <td>{{ product.operatingSystem }}</td>
                 <td>{{ product.isReady }}</td>
+                <td>
+                  <button
+                    type="submit"
+                    class="badge bg-secondary"
+                    v-if="product.isReady === true"
+                    @click="setChoice(product.id)"
+                  >
+                    Pick
+                  </button>
+                </td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
       <div class="col-sm-3">
-        <p>Sed ut perspiciatis...</p>
+        <br />
+        <br />
+        <br />
+        <form>
+          <div class="form-group row">
+            <label for="productId" class="col-sm-4 col-form-label"
+              >Product ID</label
+            >
+            <div class="col-sm-8">
+              <input
+                type="text"
+                readonly
+                class="form-control"
+                id="productId"
+                v-model="chosenIndex"
+              />
+            </div>
+          </div>
+          <br />
+          <button
+            type="submit"
+            class="badge bg-secondary"
+            @click="addToCart(chosenIndex)"
+          >
+            add to cart
+          </button>
+        </form>
       </div>
     </div>
   </div>
@@ -91,11 +140,23 @@ export default {
       chosenRAM: "",
       chosenProcessor: "",
       chosenOS: "",
-      
+      chosenIndex: "",
+      shoppingCart: [],
     };
   },
   methods: {
-    cart() {
+    addToCart(index) {
+      if (index != "") {
+        this.shoppingCart.push(index);
+        this.chosenIndex = "";
+        this.shoppingCart = this.shoppingCart.filter((element, index) => {
+          return this.shoppingCart.indexOf(element) === index;
+        });
+        const parsed = JSON.stringify(this.shoppingCart);
+        localStorage.setItem("cart", parsed);
+      }
+    },
+    goToCart() {
       this.$router.push({ name: "UserShoppingCart" });
     },
     getAllRam() {
@@ -169,41 +230,44 @@ export default {
           this.chosenProcessor = "";
           this.chosenRAM = "";
           this.products = response.data;
-          
         })
         .catch((e) => {
           alert("fail");
           this.message = e.response.data.message;
         });
     },
-    getAvailable(ready){
-      if(ready == true){
-        ProductService.getAvailable().then((response)=>{
-        this.products = [];
-        this.chosenProcessor = "";
-        this.chosenRAM = "";
-        this.chosenOS = "";
-        this.products = response.data;
-        console.log(this.products);
-      }).catch((e)=>{
-        this.message = e.response.data.message;
-      })
-      }else if(ready == false){
-        ProductService.getUnavailable().then((response)=>{
-        this.products = [];
-        this.chosenProcessor = "";
-        this.chosenRAM = "";
-        this.chosenOS = "";
-        this.products = response.data;
-        console.log(this.products);
-      }).catch((e)=>{
-        this.message = e.response.data.message;
-      })
+    getAvailable(ready) {
+      if (ready == true) {
+        ProductService.getAvailable()
+          .then((response) => {
+            this.products = [];
+            this.chosenProcessor = "";
+            this.chosenRAM = "";
+            this.chosenOS = "";
+            this.products = response.data;
+            console.log(this.products);
+          })
+          .catch((e) => {
+            this.message = e.response.data.message;
+          });
+      } else if (ready == false) {
+        ProductService.getUnavailable()
+          .then((response) => {
+            this.products = [];
+            this.chosenProcessor = "";
+            this.chosenRAM = "";
+            this.chosenOS = "";
+            this.products = response.data;
+            console.log(this.products);
+          })
+          .catch((e) => {
+            this.message = e.response.data.message;
+          });
       }
-      
     },
-   
-    
+    setChoice(index) {
+      this.chosenIndex = index;
+    },
   },
   mounted() {
     this.getAllProducts();
@@ -211,6 +275,7 @@ export default {
     this.getAllProcessor();
     this.getAllOperatingSystem();
     this.getAvailable(true);
+    
   },
 };
 </script>

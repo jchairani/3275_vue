@@ -28,6 +28,16 @@ class ProductService{
     getUnavailable(){
         return http.get(`/products/isNotReady`);
     }
+    setAvailablity(id,availability){
+        return http.put(`/products/${id}/isReady/${availability}`);
+    }
+    getProductById(id){
+        return http.get(`/products/id/${id}`);
+    }
+    addUserProduct(username,data){
+        
+        return http.put(`/${username}/product`,data);
+    }
 }
 
 export default new ProductService();
