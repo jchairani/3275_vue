@@ -7,6 +7,11 @@ import UserAssetManagement from "../components/UserAssetManagement";
 import UserShoppingCart from "../components/UserShoppingCart";
 import AdminFunctionsProduct from "../components/AdminFunctionsProduct";
 import AdminFunctionsUser from "../components/AdminFunctionsUser";
+import AdminFunctionsProductAdd from "../components/AdminFunctionsProductAdd";
+import AdminFunctionsProductMod from "../components/AdminFunctionsProductMod";
+import AdminFunctionsUserAdd from "../components/AdminFunctionsUserAdd";
+import AdminFunctionsUserMod from "../components/AdminFunctionsUserMod";
+import UserRegistration from "../components/UserRegistration";
 
 const routes = [
     {
@@ -48,6 +53,31 @@ const routes = [
         path: "/AdminFunctionsUser",
         name: "AdminFunctionsUser",
         component: AdminFunctionsUser
+    },
+    {
+        path: "/AdminFunctionsUserAdd",
+        name: "AdminFunctionsUserAdd",
+        component: AdminFunctionsUserAdd
+    },
+    {
+        path: "/AdminFunctionsUserMod",
+        name: "AdminFunctionsUserMod",
+        component: AdminFunctionsUserMod
+    },
+    {
+        path: "/AdminFunctionsProductAdd",
+        name: "AdminFunctionsProductAdd",
+        component: AdminFunctionsProductAdd
+    },
+    {
+        path: "/AdminFunctionsProductMod",
+        name: "AdminFunctionsProductMod",
+        component: AdminFunctionsProductMod
+    },
+    {
+        path: "/UserRegistration",
+        name: "UserRegistration",
+        component: UserRegistration
     },
 
 ];

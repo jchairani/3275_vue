@@ -1,6 +1,9 @@
 <template>
   <div>
     <h1>Product Modification</h1>
+    <br>
+      <form><button type="button" class="badge bg-secondary" @click="addItem()">Add New Product</button></form>
+      <br>
     
 
     <table class="table">
@@ -15,7 +18,7 @@
                 <th scope="col">Storage</th>
                 <th scope="col">Status</th>
                 <th scope="col">Delete Action</th>
-                <th scope="col">Modification Action</th>
+                <th scope="col">Update Action</th>
               </tr>
             </thead>
             <tbody>
@@ -41,7 +44,8 @@
 
 <script>
 import http from "../http-common.js";
-// import UserService from "../services/UserService";
+import ProductService from "../services/ProductService";
+
 
 export default {
   name: "adminFunctionsProducts",
@@ -52,11 +56,26 @@ export default {
   },
   methods: {
     deleteItem(id) {
-      alert(id);
+      if(confirm("Do you really want to delete?")){
+        ProductService.delete(id);
+        this.refreshData();
+        this.$router.go();
+      }
     },
 
     modify(id) {
-      alert(id);
+      localStorage.setItem("productIdUpdate", id);
+      this.$router.push({ name: "AdminFunctionsProductMod" });
+    },
+    addItem() {
+      this.$router.push({ name: "AdminFunctionsProductAdd" });
+    },
+    refreshData() {
+      http.
+      get("/products")
+      .then(response => {
+        this.users = response.data;
+      });
     },
 
   },

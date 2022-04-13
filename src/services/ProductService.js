@@ -38,6 +38,16 @@ class ProductService{
         
         return http.put(`/${username}/product`,data);
     }
+    delete(id) {
+        return http.delete(`/products/${id}`);
+    }
+    modify(id, data) {
+        return http.put(`/products/${id}`, data);
+    }
+
+    add(data) {
+        return http.post(`/products`, data);
+    }
 }
 
 export default new ProductService();

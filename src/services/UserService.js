@@ -8,6 +8,14 @@ class UserService{
     delete(id) {
         return http.delete(`/Users/${id}`);
     }
+
+    modify(id, data) {
+        return http.put(`/Users/${id}`, data);
+    }
+
+    add(data) {
+        return http.post(`/Users`, data);
+    }
     
 }
 

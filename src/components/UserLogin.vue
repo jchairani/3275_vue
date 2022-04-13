@@ -27,6 +27,9 @@
         Login
       </button>
       <p>{{ message }}</p>
+      <button type="submit" class="badge bg-secondary" @click="reg">
+        New User Registration
+      </button>
     </form>
   </div>
 </template>
@@ -62,6 +65,9 @@ export default {
           this.userLoginRequest.password = "";
           this.message = e.response.data.message;
         });
+    },
+    reg() {
+      this.$router.push({ name: "UserRegistration" });
     },
   },
   mounted() {
