@@ -48,6 +48,7 @@
         <button type="button" class="btn btn-dark" @click="checkout" id="navCart">
           Checkout
         </button>
+        
       </div>
     </div>
   </div>
@@ -96,12 +97,14 @@ export default {
         this.userId = localStorage.getItem("uid");
         this.logDataRequest.content = "User with id " + this.userId + " check out some item ";
         LogService.add(this.logDataRequest);
+
+        localStorage.removeItem('cart');
         this.$router.push("UserAssetManagement");
 
       }
     },
     back() {
-      this.$router.push({ name: "UserAssetManagement" });
+      this.$router.push("UserAssetManagement");
     },
     deleteCartItem(index) {
       this.cartDetails.splice(index, 1);

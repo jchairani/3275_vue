@@ -48,6 +48,7 @@ export default {
       
     },
     goBack() {
+      localStorage.clear();
       this.$router.push({ name: "UserLogin" });
     },
     log() {

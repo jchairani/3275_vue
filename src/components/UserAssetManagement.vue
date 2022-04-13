@@ -5,6 +5,9 @@
       >User Asset Management</span
     >
     <span class="navbar-text">
+      <button type="button" class="btn btn-light" @click="logout" id="navCart">
+          Logout
+        </button>
       <button
         type="button"
         class="btn btn-light"
@@ -51,6 +54,7 @@
 
           <div class="ml-auto col-auto">
             <button
+            id="showAll"
               type="button"
               class="btn btn-primary"
               @click="getAllProducts()"
@@ -114,12 +118,14 @@
           </div>
           <br />
           <button
-            type="submit"
-            class="badge bg-secondary"
+            type="button"
+            class="btn btn-dark"
             @click="addToCart(chosenIndex)"
           >
             add to cart
           </button>
+          <br>
+          
         </form>
       </div>
     </div>
@@ -268,13 +274,23 @@ export default {
     setChoice(index) {
       this.chosenIndex = index;
     },
+    logout(){
+      localStorage.removeItem('cart');
+      localStorage.removeItem('uid');
+      localStorage.removeItem('uname');
+      this.$router.push({ name: "UserLogin" });
+    }
   },
   mounted() {
-    this.getAllProducts();
     this.getAllRam();
     this.getAllProcessor();
     this.getAllOperatingSystem();
-    this.getAvailable(true);
+    this.getAllProducts();
+    setTimeout(function(){ 
+                    const elem = document.getElementById('showAll');
+                    elem.click(); 
+                }, 100);
+    
   },
 };
 </script>
