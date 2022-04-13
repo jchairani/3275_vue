@@ -36,6 +36,7 @@
 
 <script>
 import LoginService from "../services/LoginService";
+import LogService from "../services/LogService";
 
 export default {
   name: "userLogin",
@@ -43,6 +44,7 @@ export default {
     return {
       userLoginRequest: { username: "", password: "" },
       message: "",
+      logDataRequest: { content: ""},
     };
   },
   methods: {
@@ -52,6 +54,8 @@ export default {
           var user = response.data;
           localStorage.setItem("uid", user.id);
           localStorage.setItem("uname", user.username);
+          this.logDataRequest.content = "User with id " + user.id + " login";
+          LogService.add(this.logDataRequest);
           if (user.admin == 'admin') {
             this.$router.push({ name: "AdminFunctions" });
           } else {

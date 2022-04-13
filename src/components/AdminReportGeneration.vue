@@ -69,6 +69,7 @@
 
 <script>
 import http from "../http-common.js";
+import LogService from "../services/LogService";
 
 export default {
   name: "reportGeneration",
@@ -78,6 +79,8 @@ export default {
       users: [],
       c1: 0,
       c2: 0,
+      userId: "",
+      logDataRequest: { content: ""},
     };
   },
   methods: {
@@ -86,6 +89,9 @@ export default {
     }
   },
   mounted() {
+    this.userId = localStorage.getItem("uid");
+    this.logDataRequest.content = "User with id " + this.userId + " generate a report";
+    LogService.add(this.logDataRequest);
     http
       .get("/products")
       .then((reponse) => {

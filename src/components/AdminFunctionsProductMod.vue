@@ -78,6 +78,7 @@
 
 <script>
 import ProductService from "../services/ProductService";
+import LogService from "../services/LogService";
 
 export default {
   name: "adminFunctionsProductMod",
@@ -86,6 +87,8 @@ export default {
       productDataRequest: { ram: "", processor: "", operatingSystem: "", gpu: "", storage: "", brandName: "", isReady: true},
       message: "",
       productId: "",
+      userId: "",
+      logDataRequest: { content: ""},
     };
   },
   methods: {
@@ -94,6 +97,9 @@ export default {
       .then((response) => {
           var product = response.data;
           console.log(product);
+          this.userId = localStorage.getItem("uid");
+          this.logDataRequest.content = "User with id " + this.userId + " update the product with id " + this.productId;
+          LogService.add(this.logDataRequest);
           alert("Product Updated Succesfully");
           this.productDataRequest.ram = "";
           this.productDataRequest.processor = "";

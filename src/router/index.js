@@ -12,6 +12,7 @@ import AdminFunctionsProductMod from "../components/AdminFunctionsProductMod";
 import AdminFunctionsUserAdd from "../components/AdminFunctionsUserAdd";
 import AdminFunctionsUserMod from "../components/AdminFunctionsUserMod";
 import UserRegistration from "../components/UserRegistration";
+import AdminFunctionsLog from "../components/AdminFunctionsLog";
 
 const routes = [
     {
@@ -78,6 +79,11 @@ const routes = [
         path: "/UserRegistration",
         name: "UserRegistration",
         component: UserRegistration
+    },
+    {
+        path: "/AdminFunctionsLog",
+        name: "AdminFunctionsLog",
+        component: AdminFunctionsLog
     },
 
 ];

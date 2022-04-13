@@ -68,6 +68,7 @@
 
 <script>
 import ProductService from "../services/ProductService";
+import LogService from "../services/LogService";
 
 export default {
   name: "adminFunctionsProductAdd",
@@ -75,6 +76,8 @@ export default {
     return {
       productDataRequest: { ram: "", processor: "", operatingSystem: "", gpu: "", storage: "", brandName: "", isReady: true},
       message: "",
+      userId: "",
+      logDataRequest: { content: ""},
     };
   },
   methods: {
@@ -83,6 +86,9 @@ export default {
       .then((response) => {
           var product = response.data;
           console.log(product);
+          this.userId = localStorage.getItem("uid");
+          this.logDataRequest.content = "User with id " + this.userId + " add a new product";
+          LogService.add(this.logDataRequest);
           alert("Product Added Succesfully");
           this.productDataRequest.ram = "";
           this.productDataRequest.processor = "";

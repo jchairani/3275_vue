@@ -55,6 +55,7 @@
 
 <script>
 import ProductService from "../services/ProductService.js";
+import LogService from "../services/LogService";
 export default {
   name: "userShoppingCart",
   data() {
@@ -65,7 +66,9 @@ export default {
       registrationRequest : {
         action: "",
         id : ""
-      }
+      },
+      userId: "",
+      logDataRequest: { content: ""},
     };
   },
   methods: {
@@ -90,7 +93,9 @@ export default {
           this.message = e.response.data.message;
         })
 
-        
+        this.userId = localStorage.getItem("uid");
+        this.logDataRequest.content = "User with id " + this.userId + " check out some item ";
+        LogService.add(this.logDataRequest);
         this.$router.push("UserAssetManagement");
 
       }

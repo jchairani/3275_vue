@@ -42,6 +42,7 @@
 
 <script>
 import UserService from "../services/UserService";
+import LogService from "../services/LogService";
 
 export default {
   name: "adminFunctionsUserAdd",
@@ -49,6 +50,8 @@ export default {
     return {
       userDataRequest: { username: "", password: "", admin: ""},
       message: "",
+      userId: "",
+      logDataRequest: { content: ""},
     };
   },
   methods: {
@@ -57,6 +60,9 @@ export default {
       .then((response) => {
           var product = response.data;
           console.log(product);
+          this.userId = localStorage.getItem("uid");
+          this.logDataRequest.content = "User with id " + this.userId + " add a new user with username " + this.userDataRequest.username;
+          LogService.add(this.logDataRequest);
           alert("User Added Succesfully");
           this.$router.push({ name: "AdminFunctionsUser" });
         })

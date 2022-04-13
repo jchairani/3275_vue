@@ -14,6 +14,10 @@
         Generate Report
       </button><br><br>
 
+  <button type="submit" class="badge bg-secondary" @click="log">
+        Get all activity Log
+      </button><br><br>
+
   <button type="submit" class="badge bg-secondary" @click="goBack">
         Sign out
       </button><br><br>    
@@ -45,6 +49,9 @@ export default {
     },
     goBack() {
       this.$router.push({ name: "UserLogin" });
+    },
+    log() {
+      this.$router.push({ name: "AdminFunctionsLog" });
     }
   },
   mounted() {

@@ -48,6 +48,8 @@
 <script>
 import http from "../http-common.js";
 import ProductService from "../services/ProductService";
+import LogService from "../services/LogService";
+
 
 
 export default {
@@ -55,11 +57,16 @@ export default {
   data() {
     return {
       products: [],
+      userId: "",
+      logDataRequest: { content: ""},
     };
   },
   methods: {
     deleteItem(id) {
       if(confirm("Do you really want to delete?")){
+        this.userId = localStorage.getItem("uid");
+        this.logDataRequest.content = "User with id " + this.userId + " delete the product with id " + id;
+        LogService.add(this.logDataRequest);
         ProductService.delete(id);
         this.refreshData();
         this.$router.go();

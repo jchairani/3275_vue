@@ -36,17 +36,23 @@
 <script>
 import http from "../http-common.js";
 import UserService from "../services/UserService";
+import LogService from "../services/LogService";
 
 export default {
   name: "adminFunctionsUser",
   data() {
     return {
       users: [],
+      userId: "",
+      logDataRequest: { content: ""},
     };
   },
   methods: {
     deleteItem(id) {
       if(confirm("Do you really want to delete?")){
+        this.userId = localStorage.getItem("uid");
+        this.logDataRequest.content = "User with id " + this.userId + " delete the user with id " + id;
+        LogService.add(this.logDataRequest);
         UserService.delete(id);
         this.refreshData();
         this.$router.go();
