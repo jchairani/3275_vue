@@ -60,7 +60,6 @@ export default {
           
         })
         .catch((e) => {
-          alert("User doesn't exist");
           this.userLoginRequest.userId = "";
           this.userLoginRequest.password = "";
           this.message = e.response.data.message;

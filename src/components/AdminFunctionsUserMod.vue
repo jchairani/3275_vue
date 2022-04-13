@@ -23,12 +23,12 @@
       </div>
       <div class="form-group">
         <label for="admin">Role</label>
-        <input
-          type="text"
-          class="form-control"
-          id="admin"
-          v-model="userDataRequest.admin"
-        />
+        <br>
+        <select class="dropdown" v-model="userDataRequest.admin">
+          <option disabled value="">Please select one</option>
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
       </div>
       <br>
       <button type="submit" class="badge bg-secondary" @click="add">

@@ -2,17 +2,21 @@
   <div>
     <h1>Admin Functions</h1>
   <h2>Welcome Admin</h2>
-  <button type="submit" class="badge badge-success" @click="user">
+  <button type="submit" class="badge bg-secondary" @click="user">
         Modify Users
       </button><br><br>
 
-  <button type="submit" class="badge badge-success" @click="products">
+  <button type="submit" class="badge bg-secondary" @click="products">
         Modify Products and Inventory
       </button><br><br>
 
-  <button type="submit" class="badge badge-success" @click="report">
+  <button type="submit" class="badge bg-secondary" @click="report">
         Generate Report
       </button><br><br>
+
+  <button type="submit" class="badge bg-secondary" @click="goBack">
+        Sign out
+      </button><br><br>    
 
   </div>
   
@@ -39,6 +43,9 @@ export default {
       this.$router.push({ name: "AdminFunctionsUser" });
       
     },
+    goBack() {
+      this.$router.push({ name: "UserLogin" });
+    }
   },
   mounted() {
     
@@ -51,13 +58,9 @@ h1 {
   color: red;
 }
 
-h2 {
-  color: white;
-  background-color: blue;
-}
+
 
 button {
-  color: black;
   width: 250px;
 }
 </style>

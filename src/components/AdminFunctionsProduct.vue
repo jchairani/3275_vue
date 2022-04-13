@@ -36,7 +36,10 @@
               </tr>
             </tbody>
           </table>
-          
+          <br><br>
+          <button type="submit" class="badge bg-secondary" @click="goBack">
+        Go Back
+      </button>
 
      
   </div>
@@ -77,6 +80,9 @@ export default {
         this.users = response.data;
       });
     },
+    goBack() {
+      this.$router.push({ name: "AdminFunctions" });
+    }
 
   },
   mounted() {

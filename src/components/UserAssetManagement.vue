@@ -55,7 +55,7 @@
               class="btn btn-primary"
               @click="getAllProducts()"
             >
-              Refresh
+              Show All
             </button>
           </div>
         </div>
@@ -275,7 +275,6 @@ export default {
     this.getAllProcessor();
     this.getAllOperatingSystem();
     this.getAvailable(true);
-    
   },
 };
 </script>
