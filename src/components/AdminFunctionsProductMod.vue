@@ -58,13 +58,13 @@
         />
       </div>
       <div class="form-group">
-        <label for="Status">Status</label>
-        <input
-          type="text"
-          class="form-control"
-          id="Status"
-          v-model="productDataRequest.Status"
-        />
+        <label for="status">Status</label>
+        <br>
+        <select class="dropdown" v-model="productDataRequest.isReady">
+          <option disabled value="">Please select one</option>
+          <option value="true">True</option>
+          <option value="false">False</option>
+        </select>
       </div>
       <br>
       <button type="submit" class="badge bg-secondary" @click="add">
